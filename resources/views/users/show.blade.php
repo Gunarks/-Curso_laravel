@@ -20,7 +20,7 @@
     </style>
   </head>
   <body>
-    <h1>Trabalhando com os verbos HTTP</h1>
+    <h1>Trabalhando com os verbos HTTP -> Show -> GET</h1>
    <div class="container">
      <table class="table">
         <thead>
@@ -38,7 +38,7 @@
               <td>{{ $user->email}}</td>
               <td>
                 <a href="{{route('users')}}" class="btn btn-warning">Voltar</a>
-                <a href="#" class="btn btn-primary">Editar</a>
+                <a href="{{route('user/edit', $user->id)}}" class="btn btn-primary">Editar</a>
                 <a href="#" class="btn btn-danger">Deletar</a>
               </td>
             </tr>

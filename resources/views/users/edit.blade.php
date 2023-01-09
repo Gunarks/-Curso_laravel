@@ -35,9 +35,11 @@
 </head>
 
 <body>
-    <h1>Trabalhando com os verbos HTTP</h1>
+    <h1>Trabalhando com os verbos HTTP -> Update -> PUT</h1>
     <div class="container">
-        <form>
+        <form method="POST" action="{{route('user/update', $user->id)}}">
+            @csrf
+            @method('put')
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">E-mail</label>
                 <input type="email" class="form-control" name="email" id="email" value="{{ $user->email }}"
@@ -49,7 +51,7 @@
                     placeholder="Digite seu nome aqui">
             </div>
             <div class="mb-3 btns">
-                <button type="submit" class="btn btn-primary">Editar</button>
+                <button type="submit" class="btn btn-primary">Atualizar</button>
                 <a href="{{ route('users') }}" class="btn btn-warning">Voltar</a>
             </div>
         </form>

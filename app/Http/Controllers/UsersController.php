@@ -48,7 +48,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $user = User::find($id);
 
@@ -63,9 +63,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
 
+        // dd($id);
         $user = User::find($id);
         return view('users/edit', [
             'user' => $user
@@ -79,19 +80,29 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $data = $request->only(['name', 'email'], $id);
+        $user = User::find($id);
+        $user->update($data);
+
+
+
+        return redirect()->back();
+
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     *@param Request $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(int $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->back();
     }
 }

@@ -44,7 +44,11 @@
                         <td>
                             <a href="{{ route('user/show', $user->id) }}" class="btn btn-success">Exibir</a>
                             <a href="{{ route('user/edit', $user->id) }}" class="btn btn-primary">Editar</a>
-                            <a href="#" class="btn btn-danger">Deletar</a>
+                            <form method="POST" action="{{route('user/delete', $user->id)}}">
+                                @method('delete')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Deletar</button>
+                            </form>
                         </td>
 
                     </tr>
