@@ -16,6 +16,15 @@
             margin: 50px auto;
             width: 60%;
         }
+        .header a {
+            display: block;
+            width: 10%;
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom:30px;
+        }
 
         table {
             text-align: center;
@@ -24,7 +33,10 @@
 </head>
 
 <body>
-    <h1>Trabalhando com os verbos HTTP</h1>
+   <div class="header">
+        <h1>Trabalhando com os verbos HTTP</h1>
+        <a type="button" href="{{route('user/create')}}" class="btn btn-success">Criar usuário</a>
+   </div>
     <div class="container">
         <table class="table">
             <thead>
@@ -32,7 +44,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">E-mail</th>
-                    <th scope="col">Actions</th>
+                    <th colspan="2" scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,11 +54,13 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <a href="{{ route('user/show', $user->id) }}" class="btn btn-success">Exibir</a>
+                            <a href="{{ route('user/show', $user->id) }}" class="btn btn-info">Exibir</a>
                             <a href="{{ route('user/edit', $user->id) }}" class="btn btn-primary">Editar</a>
-                            <form method="POST" action="{{route('user/delete', $user->id)}}">
-                                @method('delete')
+                        </td>
+                        <td>
+                            <form action="{{route('user/destroy', $user->id)}}" method="POST">
                                 @csrf
+                                @method('delete')
                                 <button type="submit" class="btn btn-danger">Deletar</button>
                             </form>
                         </td>

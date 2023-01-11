@@ -28,7 +28,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('users/create');
     }
 
     /**
@@ -39,7 +39,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data = $request->only(['name', 'email']);
+
+        $data['password'] = bcrypt('password') ;
+
+        $user = User::create($data);
+
+        return redirect()->route('users');
+
     }
 
     /**
@@ -94,11 +102,10 @@ class UsersController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *@param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(int $id)
+    public function destroy(int $id)
     {
         $user = User::find($id);
         $user->delete();
