@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('user')->name('user/')
+->controller(UsersController::class)
+->group(function (){
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/create', 'store')->name('store');
+    Route::get('/{user}', 'show')->withTrashed()->name('show');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::put('edit/{id}', 'update')->name('update');
+    Route::delete('/delete/{id}', 'destroy')->name('destroy');
+});
 
-Route::get('/', [UsersController::class, 'index'])->name('users');
-Route::get('/user/create', [UsersController::class, 'create'])->name('user/create');
-Route::post('/user/create', [UsersController::class, 'store'])->name('user/store');
-Route::get('/user/{id}', [UsersController::class, 'show'])->name('user/show');
-Route::get('/user/edit/{id}', [UsersController::class, 'edit'])->name('user/edit');
-Route::put('/user/edit/{id}', [UsersController::class, 'update'])->name('user/update');
-Route::delete('/user/delete/{id}', [UsersController::class, 'destroy'])->name('user/destroy');

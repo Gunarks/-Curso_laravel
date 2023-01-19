@@ -14,6 +14,10 @@ class UsersController extends Controller
      */
     public function index()
     {
+        // if(request()->route()->named('users/index')):
+        //    dd('Testando sabagaça');
+        // endif;
+
         $users = User::get();
         // dd($users);
         return view('users/index', [
@@ -46,19 +50,21 @@ class UsersController extends Controller
 
         $user = User::create($data);
 
-        return redirect()->route('users');
+        return redirect()->route('user/index');
 
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param User $user
+     *  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show( User $user)
     {
-        $user = User::find($id);
+
+
+        // $user = User::find($user);
 
         return view('users/show',[
             'user' => $user,

@@ -37,7 +37,7 @@
               <td>{{ $user->name}}</td>
               <td>{{ $user->email}}</td>
               <td>
-                <a href="{{route('users')}}" class="btn btn-warning">Voltar</a>
+                <a href="{{route('user/index')}}" class="btn btn-warning">Voltar</a>
                 <a href="{{route('user/edit', $user->id)}}" class="btn btn-primary">Editar</a>
                 <a href="#" class="btn btn-danger">Deletar</a>
               </td>

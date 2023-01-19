@@ -52,7 +52,7 @@
 
                 <div class="mb-3 btns">
                     <button type="submit" class="btn btn-primary">Criar</button>
-                    <a href="{{ route('users') }}" class="btn btn-warning">Voltar</a>
+                    <a href="{{ route('user/index') }}" class="btn btn-warning">Voltar</a>
                 </div>
             </form>
         </div>
