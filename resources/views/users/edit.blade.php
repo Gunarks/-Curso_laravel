@@ -45,11 +45,19 @@
                 <input type="email" class="form-control" name="email" id="email" value="{{ $user->email }}"
                     placeholder="Digite o seu e-mail aqui">
             </div>
+
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}"
                     placeholder="Digite seu nome aqui">
             </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="password" name="password" value="{{ $user->password }}"
+                    placeholder="Digite seu nome aqui">
+            </div>
+
             <div class="mb-3 btns">
                 <button type="submit" class="btn btn-primary">Atualizar</button>
                 <a href="{{ route('user/index') }}" class="btn btn-warning">Voltar</a>

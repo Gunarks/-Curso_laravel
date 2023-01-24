@@ -53,18 +53,15 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>
+                        <td class="d-flex justify-content-center gap-2">
                             <a href="{{ route('user/show', $user->id) }}" class="btn btn-info">Exibir</a>
                             <a href="{{ route('user/edit', $user->id) }}" class="btn btn-primary">Editar</a>
-                        </td>
-                        <td>
-                            <form action="{{route('user/destroy', $user->id)}}" method="POST">
+                            <form action="{{route('user/delete', $user->id)}}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Deletar</button>
                             </form>
                         </td>
-
                     </tr>
                 @endforeach
             </tbody>

@@ -40,6 +40,9 @@
         <div class="container">
             <form method="POST" action="{{route('user/store')}}">
                 @csrf
+                @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                @endforeach
                 @method('post')
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">E-mail</label>
@@ -48,6 +51,11 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Digite seu nome aqui">
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha aqui">
                 </div>
 
                 <div class="mb-3 btns">
