@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UserStoreRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -37,14 +38,8 @@ class MoviesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $request->validate([
-            'name'      => ['required', 'string'],
-            'email'     => 'required|unique:users|email',
-            'password'  => ['required', 'string','min:8', 'max:18']
-        ]);
-
         $atributes = $request->only(['name', 'email', 'password']);
 
         User::create($atributes);
@@ -74,7 +69,10 @@ class MoviesController extends Controller
      */
     public function edit($id)
     {
+
         $user = User::find($id);
+
+        if (!$user) throw new ModelNotFoundException();
 
         return view('users.edit', compact('user'));
     }

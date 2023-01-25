@@ -13,7 +13,7 @@ class UserStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,13 +24,17 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'      => 'string|required',
+            'email'     => 'email|required',
+            'password' => 'string|required',
         ];
     }
 
     public function mensage() {
         return [
-
+            'string'    => 'Esse campo prescisa ser do tipo string',
+            'email'     => 'O e-mail precisa ser um e-mail válido!',
+            'password'  => 'A senha pracisa te no mímino 8 caracters e no máximo 18',
         ];
     }
 }
