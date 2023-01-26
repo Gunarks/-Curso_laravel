@@ -40,23 +40,63 @@
         <div class="container">
             <form method="POST" action="{{route('user/store')}}">
                 @csrf
-                @foreach ($errors->all() as $error)
+                {{-- @foreach ($errors->all() as $error)
                         <li>{{$error}}</li>
-                @endforeach
+                @endforeach --}}
                 @method('post')
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Digite o seu e-mail aqui">
-                </div>
-                <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Digite seu nome aqui">
+                    <input type="text" class="form-control @error('name')
+                        is-invalid
+                    @enderror" id="name" name="name" placeholder="Digite seu nome aqui" aria-describedby="emailHelp" value="{{old('name')}}">
+
+                    @error('name')
+                        <div class="invalid-feedbck">
+                           {{$message}}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                    <input type="email" class="form-control @error('email')
+                        is-invalid
+                    @enderror" name="email" id="email" placeholder="Digite o seu e-mail aqui" aria-describedby="emailHelp" value="{{old('email ')}}">
+
+                    @error('email')
+                    <div class="invalid-feedbck">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha aqui">
+                    <input type="password" class="form-control @error('password')
+                        is-invalid
+                    @enderror" id="password" name="password" placeholder="Digite sua senha aqui">
+
+                    @error('password')
+                    <div class="invalid-feedbck">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
+
+                <div class="mb-3">
+                    <input class="form-check-input @error('terms')
+                        is-invalid
+                    @enderror" type="radio" name="terms" id="terms" >
+                    <label class="form-check-label" for="terms">Termos de uso</label>
+
+                    @error('terms')
+                    <div class="invalid-feedbck">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+
+
 
                 <div class="mb-3 btns">
                     <button type="submit" class="btn btn-primary">Criar</button>

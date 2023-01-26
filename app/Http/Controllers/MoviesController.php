@@ -29,7 +29,7 @@ class MoviesController extends Controller
      */
     public function create()
     {
-       return view('users.create');
+        return view('users.create');
     }
 
     /**
@@ -40,12 +40,12 @@ class MoviesController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        $atributes = $request->only(['name', 'email', 'password']);
+        $atributes = $request->validated();
+        dd($atributes);
 
         User::create($atributes);
 
         return redirect()->route('user/index');
-
     }
 
     /**
@@ -86,13 +86,13 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $data = $request->only(['name', 'email', 'password', $id]);
+        $data = $request->only(['name', 'email', 'password', $id]);
 
-       $user = User::find($id);
+        $user = User::find($id);
 
-       $user->update($data);
+        $user->update($data);
 
-       return redirect()->route('user/index');
+        return redirect()->route('user/index');
     }
 
     /**
@@ -105,7 +105,7 @@ class MoviesController extends Controller
     {
         $user = User::where('id', $id)->first();
 
-        if(!$user) Throw new ModelNotFoundException();
+        if (!$user) throw new ModelNotFoundException();
 
         $user->delete();
 

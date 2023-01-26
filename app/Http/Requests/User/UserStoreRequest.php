@@ -23,18 +23,22 @@ class UserStoreRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'name'      => 'string|required',
             'email'     => 'email|required',
-            'password' => 'string|required',
+            'password'  => 'string|required',
+            'terms'     => 'accepted',
         ];
     }
 
-    public function mensage() {
+    public function messages()
+    {
         return [
-            'string'    => 'Esse campo prescisa ser do tipo string',
-            'email'     => 'O e-mail precisa ser um e-mail válido!',
-            'password'  => 'A senha pracisa te no mímino 8 caracters e no máximo 18',
+            'name.string'     => 'O nome precisa ser uma string',
+            'email'           => 'O e-mail precisa ser um e-mail válido!',
+            'password.string' => 'A senha precisa ter no mínimo 8 caractéres!',
+            'terms'   => 'Aceite os termos de uso',
         ];
     }
 }
