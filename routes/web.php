@@ -53,11 +53,14 @@ Route::fallback(function () {
 //     'destroy' => 'user/destroy',
 // ]);
 
-Route::get('/user', [MoviesController::class, 'index'])->name('user/index');
-Route::get('/user/create', [MoviesController::class, 'create'])->name('user/create');
-Route::post('/user/create', [MoviesController::class, 'store'])->name('user/store');
-Route::get('/user/edit/{id}', [MoviesController::class, 'edit'])->name('user/edit');
-Route::put('/user/edit/{id}', [MoviesController::class, 'update'])->name(('user/update'));
-Route::get('/user/show/{id}', [MoviesController::class, 'show'])->name('user/show');
-Route::delete('/user/delete/{id}', [MoviesController::class, 'destroy'])->name('user/delete');
+Route::get('/users', [UsersController::class, 'index'])->name('user/index');
+Route::get('/user/create', [UsersController::class, 'create'])->name('user/create');
+Route::post('/user/create', [UsersController::class, 'store'])->name('user/store');
+Route::get('/user/edit/{id}', [UsersController::class, 'edit'])->name('user/edit');
+Route::put('/user/edit/{id}', [UsersController::class, 'update'])->name(('user/update'));
+Route::get('/user/show/{id}', [UsersController::class, 'show'])->name('user/show');
+Route::delete('/user/delete/{id}', [UsersController::class, 'destroy'])->name('user/delete');
 
+
+Route::get('/new-post', [UsersController::class, 'create'])->name('postes/create');
+Route::post('/new-post', [UsersController::class, 'store'])->name('postes/store');

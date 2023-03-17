@@ -71,6 +71,34 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="street" class="form-label">Rua</label>
+                    <input type="text" class="form-control @error('street')
+                                        is-invalid
+                                    @enderror" name="street" id="street" placeholder="Digite o seu endereço aqui"
+                        aria-describedby="emailHelp" value="{{old('street ')}}">
+
+                    @error('street')
+                    <div class="invalid-feedbck">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="number" class="form-label">Número</label>
+                    <input type="text" class="form-control @error('number')
+                                        is-invalid
+                                    @enderror" name="number" id="number" placeholder="Digite o número do seu endereço aqui"
+                        aria-describedby="number" value="{{old('number ')}}">
+
+                    @error('number')
+                    <div class="invalid-feedbck">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="password" class="form-label">Senha</label>
                     <input type="password" class="form-control @error('password')
                         is-invalid

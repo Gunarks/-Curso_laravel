@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\User\UserStoreRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UsersController extends Controller
 {
@@ -14,15 +16,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        // if(request()->route()->named('users/index')):
-        //    dd('Testando sabagaça');
-        // endif;
 
         $users = User::get();
-        // dd($users);
-        return view('users/index', [
-            'users' => $users,
-        ]);
+
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -32,7 +29,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users/create');
+        return view('users.create');
     }
 
     /**
@@ -41,34 +38,28 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
+        $atributes = $request->validated();
 
-        $data = $request->only(['name', 'email']);
+        $user = User::create($atributes);
 
-        $data['password'] = bcrypt('password') ;
-
-        $user = User::create($data);
+        $user->addressUser()->create($atributes);
 
         return redirect()->route('user/index');
-
     }
 
     /**
      * Display the specified resource.
-     * @param User $user
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($user)
+    public function show($id)
     {
+        $user = User::find($id);
 
-
-        // $user = User::find($user);
-
-        return view('users/show',[
-            'user' => $user,
-        ]);
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -77,14 +68,14 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id)
+    public function edit($id)
     {
 
-        // dd($id);
         $user = User::find($id);
-        return view('users/edit', [
-            'user' => $user
-        ]);
+
+        if (!$user) throw new ModelNotFoundException();
+
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -94,26 +85,29 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->only(['name', 'email'], $id);
+        $data = $request->only(['name', 'email', 'password', $id]);
+
         $user = User::find($id);
+
         $user->update($data);
 
-
-
-        return redirect()->back();
-
+        return redirect()->route('user/index');
     }
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy($id)
     {
-        $user = User::find($id);
+        $user = User::where('id', $id)->first();
+
+        if (!$user) throw new ModelNotFoundException();
+
         $user->delete();
 
         return redirect()->back();

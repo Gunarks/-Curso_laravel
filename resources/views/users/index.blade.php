@@ -12,14 +12,11 @@
             text-align: center;
             color: purple;
             background-color: #000;
-            padding: 100px;
-            margin: 50px auto;
-            width: 60%;
+            padding: 20px 0;
         }
         .header a {
             display: block;
-            width: 10%;
-            margin: 0 auto;
+            margin: 50px auto;
         }
 
         .header {
@@ -29,22 +26,30 @@
         table {
             text-align: center;
         }
+
+        .table thead tr th {
+            border-bottom:2px solid #000;
+        }
     </style>
 </head>
 
 <body>
    <div class="header">
-        <h1>Trabalhando com os verbos HTTP</h1>
-        <a type="button" href="{{route('user/create')}}" class="btn btn-success">Criar usuário</a>
+        <h1 class="text-uppercase">Index</h1>
+       <div class="d-flex">
+            <a type="button" href="{{route('user/create')}}" class="btn btn-primary text-uppercase">Criar usuário</a>
+            <a type="button" href="{{route('user/create')}}" class="btn btn-info text-uppercase">Novo Post</a>
+       </div>
    </div>
     <div class="container">
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">E-mail</th>
-                    <th colspan="2" scope="col">Actions</th>
+                    <th scope="col" class="text-uppercase">ID</th>
+                    <th scope="col" class="text-uppercase">Name</th>
+                    <th scope="col" class="text-uppercase">E-mail</th>
+                    <th scope="col" class="text-uppercase">Data de criação</th>
+                    <th colspan="2" scope="col" class="text-uppercase">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,13 +58,14 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>{{ $user->created_at }}</td>
                         <td class="d-flex justify-content-center gap-2">
-                            <a href="{{ route('user/show', $user->id) }}" class="btn btn-info">Exibir</a>
-                            <a href="{{ route('user/edit', $user->id) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('user/show', $user->id) }}" class="btn btn-success text-uppercase">Exibir</a>
+                            <a href="{{ route('user/edit', $user->id) }}" class="btn btn-warning text-uppercase">Editar</a>
                             <form action="{{route('user/delete', $user->id)}}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger">Deletar</button>
+                                <button type="submit" class="btn btn-danger text-uppercase">Deletar</button>
                             </form>
                         </td>
                     </tr>

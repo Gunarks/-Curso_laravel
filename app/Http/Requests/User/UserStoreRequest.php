@@ -27,6 +27,8 @@ class UserStoreRequest extends FormRequest
         return [
             'name'      => 'string|required',
             'email'     => 'email|required',
+            'street'    => 'string|required',
+            'number'    => 'string|required',
             'password'  => 'string|required',
             'terms'     => 'accepted',
         ];
@@ -37,8 +39,10 @@ class UserStoreRequest extends FormRequest
         return [
             'name.string'     => 'O nome precisa ser uma string',
             'email'           => 'O e-mail precisa ser um e-mail válido!',
+            'street.string'   => 'O endereço precisa ser uma string',
+            'number.string'   => 'O número precisa ser uma string',
             'password.string' => 'A senha precisa ter no mínimo 8 caractéres!',
-            'terms'   => 'Aceite os termos de uso',
+            'terms'           => 'Aceite os termos de uso',
         ];
     }
 }
