@@ -9,6 +9,14 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        // Diz quais campos podem ser inseridos ou alterados pelo usuário
+
+        'title',
+        'content',
+    ];
+
+
     public function userPost()
     {
         return $this->belongsTo(Post::class);

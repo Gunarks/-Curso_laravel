@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Middleware\MyFirstMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -62,5 +63,5 @@ Route::get('/user/show/{id}', [UsersController::class, 'show'])->name('user/show
 Route::delete('/user/delete/{id}', [UsersController::class, 'destroy'])->name('user/delete');
 
 
-Route::get('/new-post', [UsersController::class, 'create'])->name('postes/create');
-Route::post('/new-post', [UsersController::class, 'store'])->name('postes/store');
+Route::get('/new-post', [PostsController::class, 'create'])->name('posts/create');
+Route::post('/new-post', [PostsController::class, 'store'])->name('posts/store');

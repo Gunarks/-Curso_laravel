@@ -38,7 +38,7 @@
         <h1 class="text-uppercase">Index</h1>
        <div class="d-flex">
             <a type="button" href="{{route('user/create')}}" class="btn btn-primary text-uppercase">Criar usuário</a>
-            <a type="button" href="{{route('user/create')}}" class="btn btn-info text-uppercase">Novo Post</a>
+            <a type="button" href="{{route('posts/create')}}" class="btn btn-info text-uppercase">Novo Post</a>
        </div>
    </div>
     <div class="container">

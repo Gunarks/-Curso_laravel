@@ -2,13 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Post;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Models\Post;
 
-class MyFirstMiddleware
+class PostsMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,18 +15,17 @@ class MyFirstMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-
-    private $users;
-    public function __construct(User $users)
+    private $posts;
+    public function __construct(Post $posts)
     {
-        $this->users = $users;
+        $this->posts = $posts;
     }
 
     public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
 
-        if ($this->users->count() <= 9) :
+        if ($this->posts->count() <= 9) :
 
             return $response;
         else :

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post\PostStoreRequest;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Http\Requests\User\UserStoreRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Http\Controllers\PostsController;
+use App\Models\Post;
+use App\Models\User;
 
-class UsersController extends Controller
+class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-
-        $users = User::get();
-
-        return view('users.index', compact('users'));
+        //
     }
 
     /**
@@ -30,7 +27,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $users = User::all();
+        return view('posts.create', compact('users'));
     }
 
     /**
@@ -39,15 +37,9 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserStoreRequest $request)
+    public function store(PostStoreRequest $request)
     {
         $atributes = $request->validated();
-
-        $user = User::create($atributes);
-
-        $user->addressUser()->create($atributes);
-
-        return redirect()->route('user/index');
     }
 
     /**
@@ -58,9 +50,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-
-        return view('users.show', compact('user'));
+        //
     }
 
     /**
@@ -71,12 +61,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-
-        $user = User::find($id);
-
-        if (!$user) throw new ModelNotFoundException();
-
-        return view('users.edit', compact('user'));
+        //
     }
 
     /**
@@ -88,13 +73,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->only(['name', 'email', 'password', $id]);
-
-        $user = User::find($id);
-
-        $user->update($data);
-
-        return redirect()->route('user/index');
+        //
     }
 
     /**
@@ -105,12 +84,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::where('id', $id)->first();
-
-        if (!$user) throw new ModelNotFoundException();
-
-        $user->delete();
-
-        return redirect()->back();
+        //
     }
 }
